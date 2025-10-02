@@ -42,6 +42,7 @@ class ProductDetail(View):
 class CustomerRegistrationViwe(View):
     def get(self,request):
         form = CustomerRegistrationForm()
+        # user=request.user
         return render(request,'app/customerregistration.html',locals())
     def post(self,request):
         form = CustomerRegistrationForm(request.POST)

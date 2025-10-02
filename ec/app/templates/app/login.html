@@ -1,5 +1,8 @@
-{% extends "app/base.html" %} {% load static %} {% block titel %} Login Page
-{%endblock %} {% block main-content %}
+{% extends "app/base.html" %} 
+{% load static %} 
+{% block titel %} Login Page
+{%endblock %}
+ {% block main-content %}
 
 <div class="container">
   <div class="row my-3">
@@ -8,7 +11,9 @@
       <hr />
 
       <form action="" method="post" novalidate class="shadow p-5">
-        {% csrf_token %} {% for fm in form %} {{fm.label_tag}} {{fm}}
+        {% csrf_token %}
+         {% for fm in form %} 
+         {{fm.label_tag}} {{fm}}
         <small class="text-danger">{{fm.errors|striptags}}</small>
         <br />
 
