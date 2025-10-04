@@ -101,7 +101,3 @@ class updateAddress(View):
             messages.warning(request,"Invalid Input Data")
         return redirect("address")
     
-
-
-
-    # 3:20

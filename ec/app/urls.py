@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth import views as auth_viwe
 from .forms import LoginForm
-from .forms import MyPasswordResetForm, MyPasswordChangeForm
+from .forms import MyPasswordResetForm, MyPasswordChangeForm, MysetPasswordForm
 
 urlpatterns = [
     path('', views.home),
@@ -22,10 +22,24 @@ urlpatterns = [
 
    path('registration/',views.CustomerRegistrationViwe.as_view(), name="customerregistration"),
    path('accounts/login/',auth_viwe.LoginView.as_view(template_name='app/login.html', authentication_form=LoginForm), name="login"),
-   path('password_reset/',auth_viwe.PasswordResetView.as_view
-        (template_name='app/password_reset.html', form_class= MyPasswordResetForm) ,name="password_reset"),
    path('passwordchange/',auth_viwe.PasswordChangeView.as_view
         (template_name='app/changepassword.html',form_class=MyPasswordChangeForm, success_url ='/passwordchangedone'), name="passwordchange"),
     path('passwordchangedone/',auth_viwe.PasswordChangeDoneView.as_view(template_name='app/passwordchangedone.html'), name="passwordchangedone"),
     path('logout/',auth_viwe.LogoutView.as_view(next_page='login'), name="logout"),
+
+    path('password-reset/',auth_viwe.PasswordResetView.as_view
+        (template_name='app/password_reset.html', form_class= MyPasswordResetForm) ,name="password_reset"),
+
+
+    path('password-reset/done/',auth_viwe.PasswordResetDoneView.as_view(template_name='app/password_reset_done.html'), name="password_reset_done"),
+
+
+    path('password-reset-confirm/<uidb64>/<token>/',auth_viwe.PasswordResetConfirmView.as_view
+        (template_name='app/password_reset_confirm.html', form_class=MysetPasswordForm), name="password_reset_confirm"),
+
+
+    path('password-reset-complete/',auth_viwe.PasswordResetCompleteView.as_view(template_name='app/password_reset_complete.html'), name="password_reset_complete"),
+
+
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
